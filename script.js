@@ -1,4 +1,8 @@
 
+function showPass() {
+    document.getElementByID("pass").innerHTML = createPass();
+}
+
 // function to create password given input parameters
 function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = true, hasSpecial = false) {
 
