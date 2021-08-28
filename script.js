@@ -1,6 +1,22 @@
 
-function showPass() {
-    document.getElementByID("pass").innerHTML = createPass();
+// show password
+function showPass(lengthID = "", lowerID = "", upperID = "", numID = "", specialID = "") {
+
+    // default settings
+    length = 8;
+    lower = true;
+    upper = false;
+    num = false;
+    special = false;
+
+    // get inputs
+    if(lengthID.length != 0) length = document.getElementById(lengthID).value;
+    if(lowerID.length != 0) lower = document.getElementById(lowerID).checked;
+    if(upperID.length != 0) upper = document.getElementById(upperID).checked;
+    if(numID.length != 0) num = document.getElementById(numID).checked;
+    if(specialID.length != 0) special = document.getElementById(specialID).checked;
+
+    document.getElementById("pass").innerHTML = createPass(length, lower, upper, num, special);
 }
 
 // function to create password given input parameters
@@ -44,6 +60,8 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
     // number of total available characters
     totalLength = lowerChars.length + upperChars.length + nums.length + special.length;
 
+    if(totalLength <= 0) return;
+
     // generate remaining password
     while(currChar < passLength) {
 
@@ -53,6 +71,7 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
         // generate character based on index
         if(rand < lowerChars.length) {
             password.push(lowerChars[rand]);
+            currChar++;
             continue;
         } else {
             rand -= lowerChars.length;
@@ -60,6 +79,7 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
 
         if(rand < upperChars.length) {
             password.push(upperChars[rand]);
+            currChar++;
             continue;
         } else {
             rand -= upperChars.length;
@@ -67,6 +87,7 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
 
         if(rand < nums.length) {
             password.push(nums[rand]);
+            currChar++;
             continue;
         } else {
             rand -= nums.length;
@@ -74,6 +95,7 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
 
         if(rand < special.length) {
             password.push(special[rand]);
+            currChar++;
             continue;
         } else {
             rand -= special.length;
@@ -115,5 +137,15 @@ function randomChar(array = []) {
     if(array.length == 0) return null;
 
     return array[Math.floor(array.length * Math.random())];
+
+}
+
+function changeLabel(inputID = "", outputID = "", text = "") {
+
+    // do nothing if no input or output
+    if(inputID.length == 0 || outputID.length == 0) return;
+
+    value = document.getElementById(inputID).value;
+    document.getElementById(outputID).innerHTML = text + " " + value;
 
 }

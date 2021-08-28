@@ -1,14 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Password Generator</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     </head>
 
     <body>
-        <button type="button" onclick="showPass()">Generate Password</button>
-        <div id="pass">Password Here</div>
 
+        <!-- header -->
+        <div class="jumbotron text-center">
+            <h1>Password Generator</h1>
+            <p>Generate random passwords with the press of a button!</p>
+        </div>
+
+        <!-- content -->
+        <div class="container text-center">
+            
+            <!-- selections -->
+            <form>
+                <div class="form-group">
+                    <label for="passLength" id="passLengthLabel">
+                        Password Length: 8
+                    </label>
+                    <input type="range" class="form-control-range" id="passLength" min="8" max="32" onchange="changeLabel('passLength', 'passLengthLabel', 'Password Length: ')">
+                </div>
+                <div class="form-group form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="lower">
+                    <label class="form-check-label" for="lower">
+                        Lowercase Letters (ex: abc)
+                    </label>
+                </div>
+                <div class="form-group form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="upper">
+                    <label class="form-check-label" for="upper">
+                        Uppercase Letters (ex: ABC)
+                    </label>
+                </div>
+                <div class="form-group form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="num">
+                    <label class="form-check-label" for="num">
+                        Numbers (0-9)
+                    </label>
+                </div>
+                <div class="form-group form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="special">
+                    <label class="form-check-label" for="special">
+                        Special Characters (ex: !@#)
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="showPass('passLength', 'lower', 'upper', 'num', 'special')">Generate Password</button>
+            </form>
+            <p id="pass">Password Here</p>
+
+        </div>
+
+        <!-- password generator code -->
         <script src="script.js"></script>
+
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
