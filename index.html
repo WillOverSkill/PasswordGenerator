@@ -10,7 +10,7 @@
 
     </head>
 
-    <body>
+    <body style="background-color: whitesmoke;" onload="changeLabel('passLength', 'passLengthLabel', 'Password Length: ')">
 
         <!-- header -->
         <div class="jumbotron text-center">
@@ -19,45 +19,69 @@
         </div>
 
         <!-- content -->
-        <div class="container text-center">
+        <div class="container">
             
             <!-- selections -->
             <form>
-                <div class="form-group">
-                    <label for="passLength" id="passLengthLabel">
+
+                <!-- range selector for length of password -->
+                <div class="form-group row mb-2">
+                    <label for="passLength" id="passLengthLabel" class="col-md-2 offset-md-2">
                         Password Length: 8
                     </label>
-                    <input type="range" class="form-control-range" id="passLength" min="8" max="32" onchange="changeLabel('passLength', 'passLengthLabel', 'Password Length: ')">
-                </div>
-                <div class="form-group form-switch">
-                    <input class="form-check-input" type="checkbox" value="" id="lower">
-                    <label class="form-check-label" for="lower">
-                        Lowercase Letters (ex: abc)
-                    </label>
-                </div>
-                <div class="form-group form-switch">
-                    <input class="form-check-input" type="checkbox" value="" id="upper">
-                    <label class="form-check-label" for="upper">
-                        Uppercase Letters (ex: ABC)
-                    </label>
-                </div>
-                <div class="form-group form-switch">
-                    <input class="form-check-input" type="checkbox" value="" id="num">
-                    <label class="form-check-label" for="num">
-                        Numbers (0-9)
-                    </label>
-                </div>
-                <div class="form-group form-switch">
-                    <input class="form-check-input" type="checkbox" value="" id="special">
-                    <label class="form-check-label" for="special">
-                        Special Characters (ex: !@#)
-                    </label>
+                    <div class="col-md-6">
+                        <input type="range" class="form-control-range" id="passLength" min="8" max="32" value="8" onchange="changeLabel('passLength', 'passLengthLabel', 'Password Length: ')">
+                    </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" onclick="showPass('passLength', 'lower', 'upper', 'num', 'special')">Generate Password</button>
+                <!-- selection for password requirements -->
+                <div class="row mb-3">
+                    <div class="col-md-2 offset-md-2">Password Requirements</div>
+                    <div class="col-md-6">
+                        <div class="form-group form-switch">
+                            <input class="form-check-input" type="checkbox" value="" id="lower" checked>
+                            <label class="form-check-label" for="lower">
+                                Lowercase Letters (ex: abc)
+                            </label>
+                        </div>
+                        <div class="form-group form-switch">
+                            <input class="form-check-input" type="checkbox" value="" id="upper" checked>
+                            <label class="form-check-label" for="upper">
+                                Uppercase Letters (ex: ABC)
+                            </label>
+                        </div>
+                        <div class="form-group form-switch">
+                            <input class="form-check-input" type="checkbox" value="" id="num" checked>
+                            <label class="form-check-label" for="num">
+                                Numbers (0-9)
+                            </label>
+                        </div>
+                        <div class="form-group form-switch">
+                            <input class="form-check-input" type="checkbox" value="" id="special">
+                            <label class="form-check-label" for="special">
+                                Special Characters (ex: !@#)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- submit button and password -->
+                <div class="row mb-3">
+                    <div class="col-md-2 offset-md-2 mt-2 mb-2">
+                        <button type="button" class="btn btn-primary" onclick="showPass('passLength', 'lower', 'upper', 'num', 'special')">Generate Password</button>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="row m-0 p-2 border border-secondary">
+                            <div class="col-md-8 p-0 pb-2 pb-md-0 d-flex align-items-center">
+                                <input type="text" readonly class="form-control-plaintext" id="pass" value="Password Here">
+                            </div>
+                            <div class="col-md-4 p-0 d-flex justify-content-start justify-content-md-end">
+                                <button type="button" class="btn btn-outline-secondary" onclick="copyToClip('pass')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
-            <p id="pass">Password Here</p>
-
         </div>
 
         <!-- password generator code -->

@@ -16,7 +16,7 @@ function showPass(lengthID = "", lowerID = "", upperID = "", numID = "", special
     if(numID.length != 0) num = document.getElementById(numID).checked;
     if(specialID.length != 0) special = document.getElementById(specialID).checked;
 
-    document.getElementById("pass").innerHTML = createPass(length, lower, upper, num, special);
+    document.getElementById("pass").value = createPass(length, lower, upper, num, special);
 }
 
 // function to create password given input parameters
@@ -29,7 +29,7 @@ function createPass(passLength = 12, hasChars = true, hasCaps = true, hasNums = 
     special = [];
 
     // store password
-    password = new Array(passLength);
+    password = new Array(parseInt(passLength));
     currChar = 0;
 
     // generate available characters and add at least one to password
@@ -140,6 +140,7 @@ function randomChar(array = []) {
 
 }
 
+// add current value of input to label
 function changeLabel(inputID = "", outputID = "", text = "") {
 
     // do nothing if no input or output
@@ -147,5 +148,19 @@ function changeLabel(inputID = "", outputID = "", text = "") {
 
     value = document.getElementById(inputID).value;
     document.getElementById(outputID).innerHTML = text + " " + value;
+
+}
+
+// copy innerHTML of element to clipboard
+function copyToClip(id = "") {
+
+    // check id and do nothing if no input
+    if(id.length == 0) return;
+
+    // grab generated password
+    text = document.getElementById(id).value;
+    
+    // copy to clipboard
+    navigator.clipboard.writeText(text);
 
 }
